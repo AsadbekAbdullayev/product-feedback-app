@@ -14,7 +14,12 @@ const NewFeedbackComponent = () => {
       <Container.CardBody>
 
       <Title color='#647196' size='14px' weight={700} height='20px' margin='0 0 68px 0'>
-      <Link to={'/'}><Title color='#647196' size='14px' weight={700} height='20px' margin='0 0 68px 0'> {'<'} Go Back </Title></Link>
+      <Link style={{display:'flex'}} to={'/'}><Title color='#647196' size='14px' weight={700} height='20px' margin='0 5px 68px 0'>
+         {'< '}   </Title>
+         <Title color='#647196' size='14px' weight={700} height='20px' margin='0 0 68px 0' className='link'>
+          Go Back </Title>
+
+         </Link>
       
       </Title>
 
@@ -48,7 +53,7 @@ Create New Feedback
       </Title>
 
       <Container.inputCon margin='0 0 24px 0'>
-      <Selected defaultValue="lucy" style={{ width: 456 }} onChange={handleChange} className={'ant-select-selector'}>
+      <Selected defaultValue="Feature" style={{ width: 456 }} onChange={handleChange} className={'ant-select-selector'}>
       <OptionAnt value="Feature">
       Feature
       </OptionAnt>

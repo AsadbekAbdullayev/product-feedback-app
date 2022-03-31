@@ -2,11 +2,9 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
+width:100%;
 display: flex;
-position: relative;
-width: 1920px;
-margin: 0 auto;
-padding: 50px 165px 120px 165px;
-border: 1px solid red;
-
+flex-direction:column;
+justify-content:flex-start;
+align-items:center;
 `

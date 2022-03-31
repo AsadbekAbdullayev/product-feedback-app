@@ -8,11 +8,12 @@ export const Container = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
-margin: 130px 0 0 50px;
-width: 1200px;
+margin: 24px 0 0 0;
+width: 825px;
+height: 600px;
 border-radius: 15px;
 background: var(--bgColor);
-padding: 110px 220px;
+padding: 110px 190px;
 
 .ant-empty{
     .ant-empty-image{
@@ -25,6 +26,21 @@ padding: 110px 220px;
     
 }
 
+`
+
+export const Title = styled.div`
+font-style: normal;
+font-weight: ${({weight})=>weight ? weight : 700};
+font-size:${({size})=>size ? size : '24px'};
+line-height:${({height})=>height ? height :'35px'};
+color:${({color})=>color ? color :'#3A4374'};
+margin:${({margin})=>margin ? margin :''};
+text-decoration-line:${({underline})=>underline && 'underline'};
+.link{
+    :hover{
+        text-decoration:underline;
+    }
+}
 `
 
 

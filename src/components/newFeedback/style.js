@@ -33,7 +33,14 @@ font-size:${({size})=>size ? size : '24px'};
 line-height:${({height})=>height ? height :'35px'};
 color:${({color})=>color ? color :'#3A4374'};
 margin:${({margin})=>margin ? margin :''};
+text-decoration-line:${({underline})=>underline && 'underline'};
+.link{
+    :hover{
+        text-decoration:underline;
+    }
+}
 `
+
 Container.Input = styled.input`
 width:${({width})=>width ? width :'456px'};
 height:${({height})=>height ? height :'48px'};
