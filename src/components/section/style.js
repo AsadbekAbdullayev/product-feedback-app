@@ -1,5 +1,4 @@
 import { Button } from "antd"
-import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 
 export const Container = styled.div`
@@ -12,19 +11,20 @@ flex-direction:column;
 export const AntButton = styled(Button)`
 height:30px !important;
 background:${({color})=>color ? color :'#AD1FEA'}!important;
-margin:${({margin})=>margin ? margin :'#AD1FEA'}!important;
+margin:${({margin})=>margin ? margin :''}!important;
 :hover{
 background:${({hcolor})=>hcolor ? hcolor :''}!important;
 
 }
+background:${({click})=>click ==='true' && '#4661E6'}!important;
 border-radius: 10px !important;
 display:flex!important;
 align-items:center!important;
 justify-content:center!important;
 outline:none !important;
 border:none!important;
+margin:0 8px 15px 0;
 `
-
 
 export const Section1 = styled.div`
 width: 255px;
@@ -41,17 +41,12 @@ margin:0 0 20px 0;
 
 export const Section2 = styled.div`
 width: 255px;
-height: 166px;
-padding:24px;
-
+padding:18px;
 background: #FFFFFF;
 border-radius: 10px;
 display:flex;
-flex-direction:column;
-justify-content:flex-start;
-align-items:flex-start;
+flex-wrap:wrap;
 margin:0 0 20px 0;
-
 `
 
 export const Section3 = styled.div`
@@ -65,6 +60,11 @@ flex-direction:column;
 justify-content:flex-start;
 align-items:flex-start;
 margin:0 0 20px 0;
+.link{
+    :hover{
+        color:#8397F8;
+    }
+}
 
 `
 export const Title = styled.div`
@@ -73,13 +73,9 @@ font-weight: ${({weight})=>weight ? weight : 700};
 font-size:${({size})=>size ? size : '24px'};
 line-height:${({height})=>height ? height :'35px'};
 color:${({color})=>color ? color :'#3A4374'};
+color:${({click})=>click === 'true' && '#fff'};
 margin:${({margin})=>margin ? margin :''};
 text-decoration-line:${({underline})=>underline && 'underline'};
-.link{
-    :hover{
-        text-decoration:underline;
-    }
-}
 `
 
 export const Sircle = styled.div`

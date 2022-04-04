@@ -11,15 +11,17 @@ import Comments from '../pages/comments'
 import HomePage from '../pages/home'
 
 const Root = () => {
+
   return (
     <Container>
       <Routes>
         <Route path={'/'} element={<HomePage/>} />
-        <Route path={'/feedbackDetail'} element={<FeedbackDetail/>} />
-        <Route path={'/newFeedback'} element={<NewFeedback/>} />
-        <Route path={'/roadMap'} element={<RoadMap/>} />
-        <Route path={'/editFeedback'} element={<EditFeedback/>} />
-        <Route path={'/comments'} element={<Comments/>} />
+        <Route path={'feedbackDetail'} element={<FeedbackDetail/>} />
+        <Route path={'newFeedback'} element={<NewFeedback/>} />
+        <Route path={'roadMap'} element={<RoadMap/>} />
+        <Route path={'editFeedback/:idd'} element={<EditFeedback/>} />
+        <Route path={'comments/:idd'} element={<Comments/>}/>
+
       </Routes>
     </Container>
   )

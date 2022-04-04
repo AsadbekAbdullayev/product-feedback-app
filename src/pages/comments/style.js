@@ -9,6 +9,11 @@ display: flex;
 flex-direction:column;
 justify-content:flex-start;
 align-items:center;
+.link{
+    :hover{
+        text-decoration:underline;
+    }
+}
 `
 export const Wrap = styled.div`
 display: flex;

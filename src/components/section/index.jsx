@@ -1,7 +1,42 @@
-import React from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import {Container,Section1,Section2,Section3,Title,AntButton,Sircle } from './style'
-
+import { Link } from 'react-router-dom'
+import {Categorycontext} from '../../context/categoryContext'
+import {SetCategorycontext} from '../../context/setCategory'
 const Section = () => {
+const url = 'https://feedback-app-1.herokuapp.com/feedbacks'
+      
+
+
+      async function getData() {
+
+            try {
+              let response = await fetch(url,{ 
+                  method: 'GET',
+                  mode: 'no-cors', // 'cors' by default
+                  headers: {
+                        'Access-Control-Allow-Origin':'*'
+                      }
+              });
+              let user = await response.json();
+                  console.log(user,'heyyyy');
+            } catch(err) {
+              console.log(err);
+            }
+          }
+         
+
+const [category,setCategory] = useContext(Categorycontext)
+const [togglecategory, setToggleCategory] = useContext(SetCategorycontext)
+
+
+useEffect(()=>{getData()},[])
+
+
+const onCategory = (e)=>{
+      setToggleCategory(e)
+}
+
   return (
     <Container>
       <Section1>
@@ -11,49 +46,17 @@ const Section = () => {
       </Section1>
 
       <Section2>
-        <div style={{display:'flex',margin:'0 0 14px 0'}}>
-      <AntButton color='#F2F4FF' margin='0 8px 0 0'>
-<Title color='#4661E6' size='13px' weight={600} height='20px' >
-All
-      </Title>
-</AntButton>
-<AntButton color='#F2F4FF' margin='0 8px 0 0'>
-<Title color='#4661E6' size='13px' weight={600} height='20px' >
-UI
-      </Title>
-</AntButton>
-<AntButton color='#F2F4FF'>
-<Title color='#4661E6' size='13px' weight={600} height='20px' >
-UX
-      </Title>
-</AntButton>
-
-        </div>
-
-        <div style={{display:'flex',margin:'0 0 14px 0'}}>
-      <AntButton color='#F2F4FF' margin='0 8px 0 0'>
-<Title color='#4661E6' size='13px' weight={600} height='20px' >
-Enhancement
-      </Title>
-</AntButton>
-<AntButton color='#F2F4FF' margin='0 8px 0 0'>
-<Title color='#4661E6' size='13px' weight={600} height='20px' >
-Bug
-      </Title>
-</AntButton>
-
-
-        </div>
-
-        <div style={{display:'flex'}}>
-      <AntButton color='#F2F4FF' margin='0 8px 0 0'>
-<Title color='#4661E6' size='13px' weight={600} height='20px' >
-Feature
-      </Title>
-</AntButton>
-
-        </div>
-
+    
+      {
+             
+            category.map(({category_id,category_name})=>
+                  <AntButton color='#F2F4FF' key={category_id} click={`${togglecategory==category_id}`==`true` ? 'true' :'false'} onClick={()=>onCategory(category_id)}> 
+                  <Title color='#4661E6' size='13px' weight={600} height='20px' click={`${togglecategory==category_id}`==`true` ? 'true' :'false'} >
+                  {category_name}
+                        </Title>
+                  </AntButton>
+            )
+      }
 
       </Section2>
 
@@ -62,9 +65,11 @@ Feature
       <Title color='#3A4374' size='18px' weight={700} height='26px' >
       Roadmap
       </Title>
-      <Title color='#4661E6' size='13px' weight={600} height='19px'underline >
+      <Link to='/roadMap'>
+      <Title color='#4661E6' size='13px' weight={600} height='19px' underline className={'link'} >
       View
       </Title>
+      </Link>
 
       </div>
 

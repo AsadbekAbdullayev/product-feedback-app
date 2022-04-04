@@ -13,8 +13,8 @@ export const OptionAnt = styled(Option)`
 `
 
 export const Container = styled.div`
-width:100%;
-height:100vh;
+width: 1440px;
+height: 1024px;
 background:inherit;
 display:flex;
 justify-content:center;
@@ -24,6 +24,11 @@ padding:40px 0 0 0;
 Container.CardBody = styled.div`
 width: 540px;
 height: 735px;
+.link{
+    :hover{
+        text-decoration:underline;
+    }
+}
 `
 
 export const Title = styled.div`

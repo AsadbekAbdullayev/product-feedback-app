@@ -24,6 +24,11 @@ padding:40px 0 0 0;
 Container.CardBody = styled.div`
 width: 540px;
 height: 882px;
+.link{
+    :hover{
+        text-decoration:underline;
+    }
+}
 `
 
 export const Title = styled.div`
@@ -33,6 +38,11 @@ font-size:${({size})=>size ? size : '24px'};
 line-height:${({height})=>height ? height :'35px'};
 color:${({color})=>color ? color :'#3A4374'};
 margin:${({margin})=>margin ? margin :''};
+.link{
+    :hover{
+        text-decoration:underline;
+    }
+}
 `
 Container.Input = styled.input`
 width:${({width})=>width ? width :'456px'};

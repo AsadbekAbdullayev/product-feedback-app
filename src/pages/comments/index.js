@@ -1,9 +1,14 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import Comment from '../../components/comment'
 import { Container,Title,AntButton } from './style'
 import FeedBackComponent from '../../components/feedback'
-import { Link } from 'react-router-dom'
+import { Link,useParams } from 'react-router-dom'
+import {FeedbackContext} from '../../context/feedbackContext'
+
 const Comments = () => {
+      const { idd } = useParams()
+  const [feedData,setfeedData] = useContext(FeedbackContext)
+      const newData = feedData.filter((v)=>v.feedback_id == idd)
   return (
     <Container>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',width:'730px',margin:'0 0 24px 0'}}>
@@ -12,7 +17,7 @@ const Comments = () => {
          <Title color='#647196' size='14px' weight={700} height='20px' margin='0 0 0 5px' className='link' >
           Go Back </Title>
           </Link>
-          <Link to={'/editFeedback'}>
+          <Link to={`/editFeedback/${idd}`}>
           <AntButton color='#4661E6' hcolor='#7C91F9'>
 <Title color='#F2F4FE' size='14px' weight={700} height='20px' >
 Edit Feedback
@@ -21,7 +26,19 @@ Edit Feedback
 </Link>
 
       </div>
-      <FeedBackComponent width='730px'/>
+      {
+            newData.map(({feedback_id,feedback_title,
+                  feedback_description,feedback_status,
+                  feedback_like,category_id,category_name,comment_count})=> 
+                        <FeedBackComponent width='730px'
+                 id={feedback_id}  key={feedback_id} title={feedback_title} desc={feedback_description}
+                    status={feedback_status} like={feedback_like} category_name={category_name}
+                     category_id={category_id} comment_count={comment_count}/>
+                        
+                  
+                     )
+      }
+      
 
 
 

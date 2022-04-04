@@ -1,24 +1,71 @@
 
-import React from 'react'
+import React,{useContext,useState} from 'react'
 import { Container,Title,AntButton,Selected ,OptionAnt} from './style'
-import { Link } from 'react-router-dom'
+import { Link,useParams,useNavigate } from 'react-router-dom'
+import {FeedbackContext} from '../../context/feedbackContext'
 
 
 
 const EditFeedbackComponent = () => {
-  function handleChange(value) {
-    console.log(`selected ${value}`);
+
+  const { idd } = useParams()
+  const [feedData,setfeedData] = useContext(FeedbackContext)
+  const newData = feedData.filter((v)=>v.feedback_id == idd)
+  const { feedback_id,
+    feedback_title,
+    feedback_description,
+    feedback_status,
+    feedback_like,
+    category_id,
+    category_name,
+    comment_count} = newData[0]
+  const nav = useNavigate()
+ 
+  const [title,setTitle] = useState('')
+  const [desc,setDesc] = useState('')
+  const [cat,setCat] = useState('')
+
+  const  handleChange =(value)=> {
+    
+  }
+
+const SetInputTitle = (e)=>{
+  setTitle(e.target.value)
+}
+
+const SetInputDesc = (e)=>{
+  setDesc(e.target.value)
+
+  }
+
+  const editFunction = ()=>{
+    if((title.length > 0) && (desc.length > 0) && (cat.length > 0) ){
+      const ND =   {
+        feedback_id:feedData.lenght +1,
+        feedback_title: title,
+        feedback_description: desc,
+        feedback_status: 1,
+        feedback_like: 0,
+        category_id: 1,
+        category_name: cat,
+        comment_count: 0
+    }
+      setfeedData([...feedData,ND])
+      nav('/')
+  }else{
+    alert('Sorovnomani tuldiring !')
+  }
   }
 
   return (
     <Container>
       <Container.CardBody>
 
-      <Title color='#647196' size='14px' weight={700} height='20px' margin='0 0 68px 0'>
-      <Link to={'/'}><Title color='#647196' size='14px' weight={700} height='20px' margin='0 0 68px 0'> {'<'} Go Back </Title></Link>
-      
-      </Title>
-
+      <Link style={{display:'flex'}} to={'/'}><Title color='#647196' size='14px' weight={700} height='20px' margin='0 5px 68px 0'>
+         {'< '}   </Title>
+         <Title color='#647196' size='14px' weight={700} height='20px'  className='link'>
+          Go Back </Title>
+         </Link>
       <Container.Card>
 
 <Container.IconButton>
@@ -36,7 +83,7 @@ Editing ‘Add a dark theme option’
       Add a short, descriptive headline
       </Title>
       <Container.inputCon margin='0 0 24px 0'>
-      <Container.Input/>
+      <Container.Input defaultValue={feedback_title}/>
 
       </Container.inputCon>
 
@@ -49,7 +96,7 @@ Editing ‘Add a dark theme option’
       </Title>
 
       <Container.inputCon margin='0 0 24px 0'>
-      <Selected defaultValue="Feature" style={{ width: 456 }} onChange={handleChange} className={'ant-select-selector'}>
+      <Selected defaultValue={category_name} style={{ width: 456 }} onChange={handleChange} className={'ant-select-selector'}>
       <OptionAnt value="Feature">
       Feature
       </OptionAnt>
@@ -104,7 +151,7 @@ Editing ‘Add a dark theme option’
       </Title>
 
       <Container.inputCon margin='0 0 32px 0' height='96px'>
-        <Container.Input height='96px'/>
+        <Container.Input height='96px' defaultValue={feedback_description}/>
 
         
         </Container.inputCon>
