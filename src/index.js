@@ -7,6 +7,7 @@ import {CategorycontextProvider} from './context/categoryContext'
 import {FeedbackContextProvider} from './context/feedbackContext'
 import {CommentContextProvider} from './context/commentContext'
 import {SetCategorycontextProvider} from './context/setCategory'
+import { SortingContextProvider} from './context/sorting'
 import Root from './root'
 
 ReactDOM.render(
@@ -16,7 +17,9 @@ ReactDOM.render(
             <CommentContextProvider>
                <FeedbackContextProvider>
                   <CategorycontextProvider>
+                    <SortingContextProvider>
                                         <Root />
+                    </SortingContextProvider>
                   </CategorycontextProvider>
                </FeedbackContextProvider>
              </CommentContextProvider>

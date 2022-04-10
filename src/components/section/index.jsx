@@ -4,33 +4,9 @@ import { Link } from 'react-router-dom'
 import {Categorycontext} from '../../context/categoryContext'
 import {SetCategorycontext} from '../../context/setCategory'
 const Section = () => {
-const url = 'https://feedback-app-1.herokuapp.com/feedbacks'
       
-
-
-      async function getData() {
-
-            try {
-              let response = await fetch(url,{ 
-                  method: 'GET',
-                  mode: 'no-cors', // 'cors' by default
-                  headers: {
-                        'Access-Control-Allow-Origin':'*'
-                      }
-              });
-              let user = await response.json();
-                  console.log(user,'heyyyy');
-            } catch(err) {
-              console.log(err);
-            }
-          }
-         
-
 const [category,setCategory] = useContext(Categorycontext)
 const [togglecategory, setToggleCategory] = useContext(SetCategorycontext)
-
-
-useEffect(()=>{getData()},[])
 
 
 const onCategory = (e)=>{

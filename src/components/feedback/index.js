@@ -10,15 +10,34 @@ const FeedBackComponent = ({width,id,title,
 
   const [feedData,setfeedData] = useContext(FeedbackContext)
   const [llike,setLlike] = useState(1)
-const onLike = (e) =>{
+// const onLike = (e) =>{
+//   setLlike(-1*llike)
+// const ND = feedData.map((v,i)=>(v.feedback_id=== id ? {...v,feedback_like:v.feedback_like + llike}:v));
+// setfeedData(ND);
+// }
+
+//// unexpection bu https yuq degani
+
+  
+const onLike = (id)=>{
   setLlike(-1*llike)
-const ND = feedData.map((v,i)=>(v.feedback_id=== id ? {...v,feedback_like:v.feedback_like + llike}:v));
-setfeedData(ND);
+  fetch('https://feedback-app-1.herokuapp.com/feedbacks',
+  {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ feedback_id: id,
+    feedback_title:title,
+    feedback_like: like + llike })
 }
+  )
+  .then((res)=>res.json()).then((res)=>console.log(res)).catch((err)=>console.log(err))
+}
+
+
   return (
     <Container width={width}>
 <AntButton color='#F2F4FE' column={'true'} padding='10px' like={llike < 0 ? 'true' : 'false'} onClick={()=>onLike(id)}> 
-  <Icon/>
+  <Icon like={llike < 0 ? 'true' : 'false'}/>
 
 <Title color='#3A4374' size='13px' weight={700} height='20px' margin='5px 0 0 0' like={llike < 0 ? 'true' : 'false'} >
 {

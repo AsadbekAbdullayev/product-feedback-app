@@ -21,12 +21,12 @@ const EditFeedbackComponent = () => {
     comment_count} = newData[0]
   const nav = useNavigate()
  
-  const [title,setTitle] = useState('')
-  const [desc,setDesc] = useState('')
-  const [cat,setCat] = useState('')
+  const [title,setTitle] = useState(feedback_title)
+  const [desc,setDesc] = useState(feedback_description)
+  const [cat,setCat] = useState(category_name)
 
   const  handleChange =(value)=> {
-    
+    setCat(value)
   }
 
 const SetInputTitle = (e)=>{
@@ -41,22 +41,43 @@ const SetInputDesc = (e)=>{
   const editFunction = ()=>{
     if((title.length > 0) && (desc.length > 0) && (cat.length > 0) ){
       const ND =   {
-        feedback_id:feedData.lenght +1,
+        feedback_id,
         feedback_title: title,
         feedback_description: desc,
-        feedback_status: 1,
-        feedback_like: 0,
-        category_id: 1,
+        feedback_status,
+        feedback_like,
+        category_id,
         category_name: cat,
-        comment_count: 0
+        comment_count
     }
-      setfeedData([...feedData,ND])
+    fetch('https://feedback-app-1.herokuapp.com/feedbacks', {
+      method: "PUT",
+      headers: {
+          'Content-type': 'application/json'
+      },
+      body: JSON.stringify(
+        ND
+      )
+  }).then(res =>console.log(res.json())).catch(err => console.log(err))
       nav('/')
+    alert(' Feedback uzgartirildi')
   }else{
-    alert('Sorovnomani tuldiring !')
+    alert('Sorovnomani toldiring !')
   }
   }
 
+  const DeleteFunction = (id) =>{
+    // const NewData = feedData.filter((v)=>v.feedback_id !== id)
+    // setfeedData(NewData)
+    // nav('/')
+    // alert('FeedBack uchirildi !')
+
+  }
+  const CanselFuntion = () =>{
+    nav(`/comments/${feedback_id}`)
+  }
+
+  
   return (
     <Container>
       <Container.CardBody>
@@ -83,7 +104,7 @@ Editing ‘Add a dark theme option’
       Add a short, descriptive headline
       </Title>
       <Container.inputCon margin='0 0 24px 0'>
-      <Container.Input defaultValue={feedback_title}/>
+      <Container.Input defaultValue={title} onChange={(e)=>SetInputTitle(e)}/>
 
       </Container.inputCon>
 
@@ -96,7 +117,7 @@ Editing ‘Add a dark theme option’
       </Title>
 
       <Container.inputCon margin='0 0 24px 0'>
-      <Selected defaultValue={category_name} style={{ width: 456 }} onChange={handleChange} className={'ant-select-selector'}>
+      <Selected defaultValue={cat} style={{ width: 456 }} onChange={handleChange} className={'ant-select-selector'}>
       <OptionAnt value="Feature">
       Feature
       </OptionAnt>
@@ -151,27 +172,27 @@ Editing ‘Add a dark theme option’
       </Title>
 
       <Container.inputCon margin='0 0 32px 0' height='96px'>
-        <Container.Input height='96px' defaultValue={feedback_description}/>
+        <Container.Input height='96px' defaultValue={desc} onChange={(e)=>SetInputDesc(e)}/>
 
         
         </Container.inputCon>
         <div style={{display:'flex',justifyContent:'space-between',width:'100%'}}>
-        <AntButton color='#D73737' hcolor='#E98888'>
+        <AntButton color='#D73737' hcolor='#E98888' onClick={()=>DeleteFunction(feedback_id)} >
 <Title color='#F2F4FE' size='14px' weight={700} height='20px' >
 Delete
       </Title>
 </AntButton>
 
         <div style={{display:'flex'}}>
-<AntButton color='#3A4374' hcolor='#656EA3'>
+<AntButton color='#3A4374' hcolor='#656EA3' onClick={CanselFuntion}>
 <Title color='#F2F4FE' size='14px' weight={700} height='20px' >
 Cancel
       </Title>
 </AntButton>
 
-<AntButton margin='0 0 0 20px' hcolor='#C75AF6'>
+<AntButton margin='0 0 0 20px' hcolor='#C75AF6' onClick={editFunction}>
 <Title color='#F2F4FE' size='14px' weight={700} height='20px' >
-Add Feedback
+Edit Feedback
       </Title>
 </AntButton>
 </div>

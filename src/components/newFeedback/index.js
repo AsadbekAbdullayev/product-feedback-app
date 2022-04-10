@@ -40,8 +40,18 @@ const addF = ()=>{
       category_name: cat,
       comment_count: 0
   }
-    setfeedData([...feedData,ND])
+
+  fetch('https://feedback-app-1.herokuapp.com/feedbacks', {
+    method: "POST",
+    headers: {
+        'Content-type': 'application/json'
+    },
+    body: JSON.stringify(
+      ND
+    )
+}).then(res =>console.log(res.json())).catch(err => console.log(err))
     nav('/')
+  alert('Yangi Feedback qushildi')
 }else{
   alert('Sorovnomani toldiring !')
 }
@@ -123,7 +133,7 @@ Create New Feedback
         
         </Container.inputCon>
         <div style={{display:'flex', marginLeft:'auto'}}>
-<AntButton color='#3A4374' hcolor='#656EA3'>
+<AntButton color='#3A4374' hcolor='#656EA3' onClick={()=>nav('/')}>
 <Title color='#F2F4FE' size='14px' weight={700} height='20px' >
 Cancel
       </Title>

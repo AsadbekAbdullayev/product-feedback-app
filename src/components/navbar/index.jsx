@@ -1,7 +1,20 @@
-import React from 'react'
+import React,{useState,useContext} from 'react'
 import  {Container,Logo,Title,Selected,OptionAnt,AntButton } from './style'
+import { SortingContext } from '../../context/sorting'
+import { FeedbackContext } from '../../context/feedbackContext'
 import {Link } from 'react-router-dom'
 const Navbar = () => {
+
+  const [sorting, setSorting] = useContext(SortingContext)
+  const [feedback, setFeedback] = useContext(FeedbackContext)
+
+function handleChange(value) {
+  setSorting(value)
+  fetch(`https://feedback-app-1.herokuapp.com/feedbacks?sorting=${sorting}`)
+.then((res)=>res.json()).then((res)=>setFeedback(res)).catch((err)=>console.log(err))
+  console.log(feedback);
+}
+// antd dagi select valuesi birxil bulsas error beradi
   return (
     <Container>
       <div style={{display:'flex',alignItems:'center',margin:'0 0 0 8px'}}>
@@ -16,17 +29,15 @@ const Navbar = () => {
       Sort by:
       </Title>
       <Container.inputCon width='160px' margin='0 0 5px 4px'>
-      <Selected defaultValue="Most Upvotes"   className={'ant-select-selector'}>
-      <OptionAnt value="Most Upvotes">
-      Most Upvotes
-      </OptionAnt>
-      <OptionAnt value="Least Upvotes">
+      <Selected defaultValue="mostL"   className={'ant-select-selector'} onChange={handleChange}>
+     
+      <OptionAnt value="mostL" >
       Least Upvotes
       </OptionAnt>
-      <OptionAnt value="Most Comments">
+      <OptionAnt value="mostC">
       Most Comments
       </OptionAnt>
-      <OptionAnt value="Least Comments">
+      <OptionAnt value="leastC" >
       Least Comments
       </OptionAnt>
      

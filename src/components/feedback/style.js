@@ -13,6 +13,9 @@ margin: 0 0 20px 0;
 `
 export const Icon = styled(Arrow)`
 font-size:10px;
+& path {
+    stroke: ${({ like }) => like === 'true' && "#fff"};
+  } 
 `
 export const IconM = styled(Massage)`
 width: 18px;
